@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import time
+from typing import Optional, Tuple
 
 import redis
 from redis.exceptions import RedisError
@@ -16,7 +17,7 @@ LAST_ID_KEY = "alert_worker:last_id"
 redis_client = redis.Redis.from_url(REDIS_URL, decode_responses=True)
 
 
-def detect_anomaly(fields: dict[str, str]) -> tuple[str, str] | None:
+def detect_anomaly(fields: dict[str, str]) -> Optional[Tuple[str, str]]:
     try:
         temperature = float(fields["temperature"])
         battery_level = float(fields["battery_level"])

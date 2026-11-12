@@ -4,6 +4,7 @@ import os
 import random
 import time
 from datetime import datetime, timezone
+from typing import Union
 
 import requests
 
@@ -25,7 +26,7 @@ ANOMALIES = {
 }
 
 
-def make_metric(index: int) -> dict[str, str | float]:
+def make_metric(index: int) -> dict[str, Union[str, float]]:
     device_number = (index % DEVICE_COUNT) + 1
     status, temperature, battery_level = ANOMALIES.get(
         index,
